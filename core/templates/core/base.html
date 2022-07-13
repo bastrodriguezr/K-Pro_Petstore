@@ -4,9 +4,277 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    {% load static %}
+
+    <!-- Link al CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!--  Titulo de la pagina  -->
+    <title>{% block tittle %}{% endblock %} | K-Pro PetStore</title>
+
 </head>
+
 <body>
-    <h1>Home</h1>
+
+    <!-- Barra Información -->
+    <nav class="navbar navbar-expand navbar-light py-0" style="background-color: #0144c9;">
+        <div class="container-fluid p-0">
+            <div class="navbar-brand nav-item active py-0">
+                <span class="py-1" style="font-size: .9rem; color: whitesmoke;">Contactanos</span>
+                <span class="navbar-text py-1 ml-2" style="font-size: .8rem; color: whitesmoke;"><i class="bi bi-whatsapp"></i> +56 9 999 999</span>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active justify-content-right ml-auto">
+                    <span class="navbar-text py-1" style="font-size: .9rem;">
+                        <a style="color: whitesmoke;" href="https://www.instagram.com/" class="nav-link py-0"><i class="bi bi-instagram"></i></a>
+                    </span>
+                    <span class="navbar-text py-1" style="font-size: .9rem; ">
+                        <a style="color: whitesmoke;" href="https://www.facebook.com/" class="nav-link py-0"><i class="bi bi-facebook"></i></a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!--  Barra de Navegacion Principal  -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="index.html">K-Pro PetStore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavBar01" aria-controls="NavBar01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Barra de Busqueda -->
+            <div class="collapse navbar-collapse" id="NavBar01">
+                <form class="form-inline justify-content-center mx-auto my-2">
+                    <input class="form-control text-center" type="search" placeholder="¿Qué buscas?">
+                    <button class="btn btn-danger mx-2 my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                
+                <ul class="navbar-nav text-center mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link active px-2 py-1"
+                        type="button" data-toggle="modal" data-target="#CarritoModdal"
+                        href="#"><i class="bi bi-cart" style="font-size: 1.5rem;" ></i><span class="mx-2 d-md-none d-lg-none d-xl-none">Carrito de Compras</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link active px-2 py-1"
+                        type="button" data-toggle="modal" data-target="#UsuarioModdal"
+                        href="#"><i class="bi bi-person-circle" style="font-size: 1.5rem;"></i><span class="mx-2 d-md-none d-lg-none d-xl-none">Usuario</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Barra de Categorias -->
+    <nav class="navbar navbar-expand navbar-light bg-light" >
+        <div class="container-fluid p-0">
+            <ul class="navbar-nav">
+                <li class="nav-item active">    
+                    <a class="nav-link py-0" href="categoria1.html">Perro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link py-0" href="categoria2.html">Gato</a>
+                </li>
+            </ul>
+        </div>
+        <div id="weather" class="d-flex" style="font-size: 1rem;">
+            <img class="d-inline inline-block m-0" id="wicon" src="" alt="Weather icon" style="height: 2rem; width: auto;">
+            <p class="d-inline m-0" id="cityname"></p>
+            <p class="temp d-inline m-0"></p>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    {% block content %}{% endblock %}
+    
+    <!-- Footer -->
+    <footer class="bg-primary text-center mt-2" style="color: white;">
+        <div class="container p-4">
+            <section class="mb-4">
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i class="bi bi-facebook"></i></a>
+  
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i class="bi bi-instagram"></i></i></a>
+  
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #25D366" href="#!" role="button"><i class="bi bi-whatsapp"></i></a>
+
+                <a id="doggobtn" class="btn btn-primary btn-floating m-1 rainbow-bg" href="#!" type="button" data-toggle="modal" data-target="#ApiModal" role="button"><i class="bi bi-question-diamond-fill"></i></a>
+            </section>
+            <section class="mb-4">
+                <p>
+                    K-Pro PetStore es una tienda online creada con la finalidad de ayudar a una organización sin fines de lucro.
+                </p>
+            </section>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        </div>
+    </footer>
+
+    <!--  Modal Carrito  -->
+    <div class="modal fade" id="CarritoModdal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Carrito Compra</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="card container-flex my-1">
+                        <div class=" d-flex">
+                            <div class="form-inline w-100">
+                                <div class=""> 
+                                    <a href="producto1.html">
+                                        <img src="https://t1.ea.ltmcdn.com/es/posts/7/1/3/tipos_de_collares_para_perros_3317_orig.jpg" width="200"> 
+                                    </a>
+                                </div>
+                                <div class="text-center mx-auto"> 
+                                    <span class="">
+                                    </span> 
+                                    <span>Collar</span>
+                                    <span>$5.990</span>
+                                    <div class="buttons">
+                                        <button     class="btn btn-danger cart-button btn-block">Quitar del Carrito</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card container-flex my-1">
+                        <div class=" d-flex">
+                            <div class="form-inline w-100">
+                                <div class=""> 
+                                    <a href="producto2.html">
+                                        <img src="https://petmas.masfinca.com/wp-content/uploads/2018/04/classic3_1024x1024.png" width="200"> 
+                                    </a>
+                                </div>
+                                <div class="text-center mx-auto"> 
+                                    <span class="">
+                                    </span> 
+                                    <span>KONG</span>
+                                    <span>$11.990</span>
+                                    <div class="buttons">
+                                        <button class="btn btn-danger cart-button btn-block">Quitar del Carrito</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 text-center align-middle">
+                            <span>TOTAL A PAGAR:</span>
+                            <span>$17.980</span>
+                        </div>
+                        <div class="col-6">
+                            <div class="buttons">
+                                <button class="btn btn-success cart-button btn-block">Pasar por Caja</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Modal Usuario  -->
+    <div class="modal fade" id="UsuarioModdal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+
+                        <!--  Registro  -->
+                        <div class="col-sm-6 mt-2">
+                            <h5>Registrate para tener tu cuenta</h5>
+                            <form class="form-inline py-1" id="registro">
+                                <input class="form-control my-2 mr-sm-2" type="text" placeholder="Nombre" name="nombre" id="nombre">
+
+                                <small id="error-nombre-reg" class="text-right text-danger py-0">* INGRESE EL NOMBRE</small>
+
+                                <input class="form-control my-2 mr-sm-2" type="email" placeholder="Correo Electronico" name="correo" id="correo">
+
+                                <small id="error-correo-reg" class="text-right text-danger py-0">* INGRESE UN CORREO VÁLIDO</small>
+
+                                <input class="form-control my-2 mr-sm-2" type="password" placeholder="Contraseña" name="contrasena" id="contrasena">
+
+                                <small id="error-contrasena-reg" class="text-right text-danger py-0">* INGRESE LA CONTRASEÑA</small>
+
+                                <input class="form-control my-2 mr-sm-2" type="password" placeholder="Repite tu Contraseña" name="check-contrasena" id="rcontrasena">
+
+                                <small id="error-rcontrasena-reg" class="text-right text-danger py-0">* LA CONTRASEÑA DEBE COINCIDIR </small>
+
+                                <input type="submit" class="btn btn-block btn-primary " value="Registrarse"></input>
+                            </form>
+                        </div>
+
+
+                        <!-- Inicio de Sesion -->
+                        <div class="col-sm-6 mt-2">
+                            <h5>Inicia sesión para ver tu cuenta</h5>
+                            <form class="form-inline py-1" id="login">
+                                <input class="form-control my-2 mr-sm-2" type="email" placeholder="Correo Electronico" id="correo-log">
+
+                                <small id="error-correo-log" class="text-right text-danger py-0">* INGRESE UN CORREO VÁLIDO</small>
+
+                                <input class="form-control my-2 mr-sm-2" type="password" placeholder="Contraseña" id="contrasena-log">
+
+                                <small id="error-contrasena-log" class="text-right text-danger py-0">* INGRESE LA CONTRASEÑA</small>
+
+                                <input type="submit" class="btn btn-block btn-primary " value="Iniciar Sesión"></input>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Modal API Doggo -->
+    <div class="modal fade" id="ApiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">DOGGO TIME</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+
+                    <div class="card container-flex my-1">
+                        <div class=" d-flex">
+                            <div class="form-inline w-100">
+                                <img class="img-fluid" style="height: auto;" id="dog-img" src=""> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JQuery y Popper Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>
