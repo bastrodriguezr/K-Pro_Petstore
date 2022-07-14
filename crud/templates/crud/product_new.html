@@ -1,0 +1,81 @@
+
+{% extends 'crud/base.html' %}
+
+{% load static %}
+{% block tittle %}Lista de Productos{% endblock %}
+
+{% block content %}
+
+<div class="container text-center">
+    <div class="row">
+        <h5 class="col-12 p-2 text-primary">AÑADIR PRODUCTO</h5>
+    </div>
+</div>
+
+<div class="container mt-4 mb-4">
+
+    {% if 'OK' in request.GET %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Ohhhhh hell yeah!!!</strong> Producto registrado satisfactoriamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% if 'FAIL' in request.GET %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Coooooño!!!</strong> En estos momentos no podemos atender su solicitud.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+            <label for="id_producto" class="fw-bold">Código Producto</label>
+            <div class="input-group">
+                {{form.id_producto}}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="nombre_producto" class="fw-bold">Nombre</label>
+            <div class="input-group">
+                {{form.nombre_producto}}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="precio" class="fw-bold">Precio Unitario $</label>
+            <div class="input-group">
+                {{form.precio}}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="stock" class="fw-bold">Stock</label>
+            <div class="input-group">
+                {{form.stock}}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="imagen" class="fw-bold">Imagen</label>
+            <div class="input-group">
+                {{form.imagen}}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="descripcion" class="fw-bold">Descripción</label>
+            <div class="input-group">
+                {{form.descripcion}}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="marca" class="fw-bold">Marca</label>
+            <div class="input-group">
+                {{form.marca}}
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <input type="submit" class="btn btn-outline-primary btn-block py-2" id="enviar" value="Registrar">
+            <input type="reset" class="btn btn-outline-success btn-block py-2" id="limpiar" value="Limpiar">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

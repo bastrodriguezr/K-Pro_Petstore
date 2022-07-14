@@ -1,0 +1,86 @@
+
+{% extends 'crud/base.html' %}
+
+{% load static %}
+{% block tittle %}Lista de Productos{% endblock %}
+
+{% block content %}
+
+
+<div class="container text-center">
+    <div class="row">
+        <h5 class="col-12 p-2 text-primary">LISTA DE PRODUCTOS</h5>
+    </div>
+</div>
+
+<div class="container-fluid mt-4 mb-4">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nombre</td>
+                        <td>Precio</td>
+                        <td>Stock</td>
+                        <td>Imagen</td>
+                        <td>Descripción</td>
+                        <td>Marca</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in productos %}
+                    <tr>
+                        <td>
+                            <a href="/crud/{{p.id_producto}}">{{p.id_producto}}</a>
+                        </td>
+                        <td>{{p.nombre}}</td>
+                        <td>{{p.precio}}</td>
+                        <td>{{p.stock}}</td>
+                        {% if p.imagen %}
+                        <td><img class="img-producto" src="{{p.imagen.url}}" alt="{{p.idPrducto}}"></td>
+                        {% else %}
+                        <td><img class="img-producto" src="{% static 'crud/img/folder-x.svg' %}" alt="{{p.id_prducto}}">
+                        </td>
+                        {% endif %}
+                        <td>{{p.descripcion}}</td>
+                        <td>{{p.marca}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Mensajes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-title">Estas seguro que deseas eliminar el producto seleccionado?<br>Este proceso no se puede deshacer.</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
+                <a href="#" id="confirmar-borrar" class="btn btn-danger">Si</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $('.modal-borrar').on('click',function() {
+        const href = $(this).attr('data-href');
+        $('#confirmar-borrar').attr('href',href);
+    })
+</script>
+
+{% endblock %}
+
