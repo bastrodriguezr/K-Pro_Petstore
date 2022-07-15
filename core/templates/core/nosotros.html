@@ -2,8 +2,149 @@
 {% extends 'core/base.html' %}
 
 {% load static %}
+ <!-- Link al CSS de Bootstrap -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+ <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 {% block tittle %}Nosotros{% endblock %}
+<body class="d-flex flex-column min-vh-100">
 
-{% block content %}
+    <script src="{% static '/core/js/api_clima.js' %}"></script>
+    <script src="{% static '/core/js/api_dogo.js' %}"></script>
+    <script src="{% static '/core/js/base_form_validation.js' %}"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-{% endblock %}
+
+    <!-- Barra Información -->
+    <nav class="navbar navbar-expand navbar-light py-0" style="background-color: #0144c9;">
+        <div class="container-fluid p-0">
+            <div class="navbar-brand nav-item active py-0">
+                <span class="py-1" style="font-size: .9rem; color: whitesmoke;">Contactanos</span>
+                <span class="navbar-text py-1 ml-2" style="font-size: .8rem; color: whitesmoke;"><i class="bi bi-whatsapp"></i> +56 9 999 999</span>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active justify-content-right ml-auto">
+                    <span class="navbar-text py-1" style="font-size: .9rem;">
+                        <a style="color: whitesmoke;" href="https://www.instagram.com/" class="nav-link py-0"><i class="bi bi-instagram"></i></a>
+                    </span>
+                    <span class="navbar-text py-1" style="font-size: .9rem; ">
+                        <a style="color: whitesmoke;" href="https://www.facebook.com/" class="nav-link py-0"><i class="bi bi-facebook"></i></a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!--  Barra de Navegacion Principal  -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="{% url 'home' %}">K-Pro PetStore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavBar01" aria-controls="NavBar01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Barra de Busqueda -->
+            <div class="collapse navbar-collapse" id="NavBar01">
+                <form class="form-inline justify-content-center mx-auto my-2">
+                    <input class="form-control text-center" type="search" placeholder="¿Qué buscas?">
+                    <button class="btn btn-danger mx-2 my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                
+                <ul class="navbar-nav text-center mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link active px-2 py-1"
+                        type="button" data-toggle="modal" data-target="#CarritoModdal"
+                        href="#"><i class="bi bi-cart" style="font-size: 1.5rem;" ></i><span class="mx-2 d-md-none d-lg-none d-xl-none">Carrito de Compras</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link active px-2 py-1"
+                        type="button" data-toggle="modal" data-target="#UsuarioModdal"
+                        href="#"><i class="bi bi-person-circle" style="font-size: 1.5rem;"></i><span class="mx-2 d-md-none d-lg-none d-xl-none">Usuario</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Barra de Categorias -->
+    <nav class="navbar navbar-expand navbar-light bg-light" >
+        <div class="container-fluid p-0">
+            <ul class="navbar-nav">
+                <li class="nav-item active">    
+                    <a class="nav-link py-0" href="{% url 'productos' %}">Perro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link py-0" href="{% url 'productos' %}">Gato</a>
+                </li>
+            </ul>
+        </div>
+        <div id="weather" class="d-flex" style="font-size: 1rem;">
+            <img class="d-inline inline-block m-0" id="wicon" src="" alt="Weather icon" style="height: 2rem; width: auto;">
+            <p class="d-inline m-0" id="cityname"></p>
+            <p class="temp d-inline m-0"></p>
+        </div>
+    </nav>
+    {% block content %}
+    <div class="container p-3 my-3 bg-primary text-white text-align: center; " >
+        <h1 style="text-align:center">Nuestro Equipo</h1>
+      </div>
+    {% endblock %}
+
+    {% block main_content %}
+    <div class="card-group">
+        <div class="card">
+        <img class="card-img-top" src="https://img.freepik.com/foto-gratis/retrato-hombre-atractivo-satisfecho-contento-feliz-camisa-moda-mezclilla-que-muestra-su-dedo-indice-esquina-superior-derecha_295783-1217.jpg?w=360" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Bernardo Soto</h5>
+            <p class="card-text">Fundador de K_Pro_Petstore</p>
+        </div>
+        </div>
+        <div class="card">
+        <img class="card-img-top" src="https://img.freepik.com/foto-gratis/hombre-serio-aislado-sobre-fondo-naranja-persona-segura-mirando-camara_482257-25138.jpg?w=360" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Ignacio Zamorano</h5>
+            <p class="card-text">Contador de K_Pro_Petstore</p>
+        </div>
+        </div>
+        <div class="card">
+        <img class="card-img-top" src="https://us.123rf.com/450wm/vadymvdrobot/vadymvdrobot1905/vadymvdrobot190504750/124365588-imagen-de-joven-confundido-posando-aislado-sobre-fondo-de-pared-amarilla-apuntando-.jpg?ver=6" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Benjamin Herrera</h5>
+            <p class="card-text">marketing de K_Pro_Petstore</p>
+        </div>
+        </div>
+    </div>
+     <!-- Footer -->
+    <footer class="bg-primary text-center mt-auto" style="color: white;">
+        <div class="container p-4">
+            <section class="mb-4">
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i class="bi bi-facebook"></i></a>
+  
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i class="bi bi-instagram"></i></i></a>
+  
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #25D366" href="#!" role="button"><i class="bi bi-whatsapp"></i></a>
+
+                <a id="doggobtn" class="btn btn-primary btn-floating m-1 rainbow-bg" href="#!" type="button" data-toggle="modal" data-target="#ApiModal" role="button"><i class="bi bi-question-diamond-fill"></i></a>
+            </section>
+            <section class="mb-4">
+                <p>
+                    K-Pro PetStore es una tienda online creada con la finalidad de ayudar a una organización sin fines de lucro.
+                </p>
+            </section>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        </div>
+    </footer>
+    {% endblock %}
+</body>
