@@ -23,7 +23,6 @@ def register(request):
                 for key, value in errors.items():
                     messages.error(request,value)
 
-                #Si se produce un error pero no queremos perder los datos....
                 request.session['registro_nombre'] = request.POST['first_name']
                 request.session['registro_apellido'] = request.POST['last_name']
                 request.session['registro_email'] = request.POST['email']
@@ -37,7 +36,6 @@ def register(request):
                 first_name = request.POST['first_name']
                 last_name = request.POST['last_name']
                 email = request.POST['email']
-                #password = request.POST['password']
                 password_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
 
                 obj = User.objects.create(first_name=first_name, last_name=last_name,email=email,password=password_hash)
@@ -55,9 +53,9 @@ def login(request):
     else:
         if request.method == 'POST':
             
-            user = User.objects.filter(email=request.POST['email_login']) #Buscamos el correo ingresado en la BD             
+            user = User.objects.filter(email=request.POST['email_login'])          
             
-            if user : #Si el usuario existe
+            if user : 
 
                 usuario_registrado = user[0]
                 
