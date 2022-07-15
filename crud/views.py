@@ -48,3 +48,24 @@ def product_detail(request, product_id):
             return render(request,'crud/product_detail.html',context)
     except:
         return redirect(reverse('product-list') + "?FAIL")
+
+
+def product_edit(request,product_id):
+    try:
+        producto = Producto.objects.get(id_producto=product_id)
+        if producto:
+            form = ProductForm(instance=producto)
+        else:
+            return redirect(reverse('product-list') + "?FAIL")
+
+        if request.method == 'POST':
+            form = ProductForm(request.POST,request.FILES,instance=producto)
+            if form.is_valid():
+                form.save()
+                return redirect(reverse('product-list') + "?SUCCESS")
+            else:
+                return redirect(reverse('product-edit') + product_id)
+        context = {'form':form}
+        return render(request,'crud/product_edit.html',context)
+    except:
+        return redirect(reverse('product-list') + "?FAIL")

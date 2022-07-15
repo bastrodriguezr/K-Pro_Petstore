@@ -13,14 +13,21 @@
     </div>
 </div>
 
-{% if 'FAIL' in request.GET %}
-<div class="alert alert-success alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    Error al agregar al realizar la acción!
-</div>
-{% endif %}
-
 <div class="container-fluid mt-4 mb-4">
+
+    {% if 'SUCCESS' in request.GET %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Acción realizada!
+    </div>
+    {% endif %}
+    {% if 'FAIL' in request.GET %}
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Error al agregar al realizar la acción!
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="table-responsive">
             <table class="table table-hover ">
@@ -56,6 +63,9 @@
                         <td>
                             <a class="btn btn-outline-dark" href="/crud/{{p.id_producto}}">
                                 <i class="bi bi-eye-fill"></i>
+                            </a>
+                            <a class="btn btn-outline-dark" href="/crud/{{p.id_producto}}/edit">
+                                <i class="bi bi-pencil-square"></i>
                             </a>
                         </td>
                     </tr>
