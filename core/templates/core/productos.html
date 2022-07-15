@@ -12,140 +12,38 @@
         <div class="row">
             <h5 class="col-12 p-2 text-primary">PRODUCTOS</h5>
         </div>
+        {% if 'FAIL' in request.GET %}
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Error al agregar al realizar la acción!
+        </div>
+        {% endif %}
         <div class="row g-1 pb-2">
 
+            {% for p in productos %}
             <div class="col-md-3 mt-2">
                 <div class="card p-3">
                     <div> 
-                        <a href="producto1.html">
-                            <img class="img-fluid" style="height: auto" src="https://t1.ea.ltmcdn.com/es/posts/7/1/3/tipos_de_collares_para_perros_3317_orig.jpg"> 
+                        <a href="{{p.id_producto}}">
+                            {% if p.imagen %}
+                            <img class="img-fluid" style="height: auto" src="{{p.imagen.url}}"> 
+                            {% else %}
+                            <img class="img-fluid" style="height: auto" src="{% static 'crud/img/folder-x.svg' %}"> 
+                            {% endif %}
                         </a> 
                     </div>
                     <div> 
                         <span class="d-block">
                         </span> 
-                        <span class="d-block">Collar</span>
-                        <span class="d-block">$5.990</span>
+                        <span class="d-block">{{p.nombre}}</span>
+                        <span class="d-block">${{p.precio}}</span>
                         <div class="buttons d-flex flex-row">
                             <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-3 mt-2">
-                <div class="card p-3">
-                    <div> 
-                        <a href="producto2.html">
-                            <img class="img-fluid" style="height: auto" src="https://petmas.masfinca.com/wp-content/uploads/2018/04/classic3_1024x1024.png"> 
-                        </a>
-                    </div>
-                    <div> 
-                        <span class="d-block">
-                        </span> 
-                        <span class="d-block">KONG</span>
-                        <span class="d-block">$11.990</span>
-                        <div class="buttons d-flex flex-row">
-                            <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mt-2">
-                <div class="card p-3">
-                    <div> 
-                        <a href="producto3.html">
-                            <img class="img-fluid" style="height: auto" src="https://cdn.shopify.com/s/files/1/0051/0548/3894/products/kong-air-football5658_6ff64fbe-bba5-4935-9c21-76b32509c38c_1024x1024.jpg?v=1606081420"> 
-                        </a>
-                    </div>
-                    <div> 
-                        <span class="d-block">
-                        </span> 
-                        <span class="d-block">KONG Air Dog</span>
-                        <span class="d-block">$13.990</span>
-                        <div class="buttons d-flex flex-row">
-                            <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mt-2">
-                <div class="card p-3">
-                    <div> 
-                        <a href="producto3.html">
-                            <img class="img-fluid" style="height: auto" src="https://cdn.shopify.com/s/files/1/0051/0548/3894/products/kong-air-football5658_6ff64fbe-bba5-4935-9c21-76b32509c38c_1024x1024.jpg?v=1606081420"> 
-                        </a>
-                    </div>
-                    <div> 
-                        <span class="d-block">
-                        </span> 
-                        <span class="d-block">KONG Air Dog</span>
-                        <span class="d-block">$13.990</span>
-                        <div class="buttons d-flex flex-row">
-                            <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mt-2">
-                <div class="card p-3">
-                    <div> 
-                        <a href="producto3.html">
-                            <img class="img-fluid" style="height: auto" src="https://cdn.shopify.com/s/files/1/0051/0548/3894/products/kong-air-football5658_6ff64fbe-bba5-4935-9c21-76b32509c38c_1024x1024.jpg?v=1606081420"> 
-                        </a>
-                    </div>
-                    <div> 
-                        <span class="d-block">
-                        </span> 
-                        <span class="d-block">KONG Air Dog</span>
-                        <span class="d-block">$13.990</span>
-                        <div class="buttons d-flex flex-row">
-                            <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mt-2">
-                <div class="card p-3">
-                    <div> 
-                        <a href="producto3.html">
-                            <img class="img-fluid" style="height: auto" src="https://cdn.shopify.com/s/files/1/0051/0548/3894/products/kong-air-football5658_6ff64fbe-bba5-4935-9c21-76b32509c38c_1024x1024.jpg?v=1606081420"> 
-                        </a>
-                    </div>
-                    <div> 
-                        <span class="d-block">
-                        </span> 
-                        <span class="d-block">KONG Air Dog</span>
-                        <span class="d-block">$13.990</span>
-                        <div class="buttons d-flex flex-row">
-                            <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mt-2">
-                <div class="card p-3">
-                    <div> 
-                        <a href="producto3.html">
-                            <img class="img-fluid" style="height: auto" src="https://cdn.shopify.com/s/files/1/0051/0548/3894/products/kong-air-football5658_6ff64fbe-bba5-4935-9c21-76b32509c38c_1024x1024.jpg?v=1606081420"> 
-                        </a>
-                    </div>
-                    <div> 
-                        <span class="d-block">
-                        </span> 
-                        <span class="d-block">KONG Air Dog</span>
-                        <span class="d-block">$13.990</span>
-                        <div class="buttons d-flex flex-row">
-                            <button class="btn btn-primary cart-button btn-block">Añadir al Carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

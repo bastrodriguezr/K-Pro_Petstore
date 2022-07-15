@@ -1,0 +1,32 @@
+
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% block tittle %}Productos{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="card p-5"> 
+                        <img src="{{producto.imagen.url}}" width="100%"> 
+                </div>
+            </div>
+            <div class="col-6 text-left text-primary align-items-center">
+                <h2 class="h1">{{producto.nombre}}</h2>
+                <p class="h4 text-left text-dark">{{producto.descripcion}}</p>
+                <span class="h4 text-dark">Precio:</span>
+                <p class="h1">${{producto.precio}}</p>
+                <span class="h4 text-dark">Stock:</span>
+                <p class="h1 text-dark">{{producto.stock}}</p>
+                <div class="buttons d-flex flex-row">
+                    <button class="btn btn-success cart-button btn-block">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
