@@ -1,22 +1,23 @@
-
 {% extends 'core/base.html' %}
 
 {% load static %}
- <!-- Link al CSS de Bootstrap -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
- <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 
 
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 {% block tittle %}Contacto{% endblock %}
+
 <body class="d-flex flex-column min-vh-100">
 
     <script src="{% static '/core/js/api_clima.js' %}"></script>
     <script src="{% static '/core/js/api_dogo.js' %}"></script>
     <script src="{% static '/core/js/base_form_validation.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+
     <script> 
         function checkRut(rut) {
             // Despejar Puntos
@@ -67,37 +68,25 @@
         }   
     </script>
     <script>
-        HTML CSS JSResult Skip Results Iframe
-        EDIT ON
-        var inputs = "input[maxlength], textarea[maxlength]";
-          $(document).on('keyup', "[maxlength]", function (e) {
-            var este = $(this),
-              maxlength = este.attr('maxlength'),
-              maxlengthint = parseInt(maxlength),
-              textoActual = este.val(),
-              currentCharacters = este.val().length;
-              remainingCharacters = maxlengthint - currentCharacters,
-              espan = este.prev('label').find('span');      
-              // Detectamos si es IE9 y si hemos llegado al final, convertir el -1 en 0 - bug ie9 porq. no coge directamente el atributo 'maxlength' de HTML5
-              if (document.addEventListener && !window.requestAnimationFrame) {
-                if (remainingCharacters <= -1) {
-                  remainingCharacters = 0;            
-                }
-              }
-              espan.html(remainingCharacters);
-              if (!!maxlength) {
-                var texto = este.val(); 
-                if (texto.length >= maxlength) {
-                  este.removeClass().addClass("borderojo");
-                  este.val(text.substring(0, maxlength));
-                  e.preventDefault();
-                }
-                else if (texto.length < maxlength) {
-                  este.removeClass().addClass("bordegris");
-                } 
-              } 
+       
+        //CONTADOR DE CARACTERES PARA EL TEXTAREA
+        var limit = 200;
+        $(function() {
+            $("#txt_detalle").on("input", function () {
+                //al cambiar el texto del txt_detalle
+                var init = $(this).val().length;
+                total_characters = (limit - init);
+
+                $('#contador').html(total_characters + " caracteres restantes");
             });
-        </script>
+        })
+    </script>
+
+    <body class="d-flex flex-column min-vh-100">
+
+    <script src="{% static '/core/js/api_clima.js' %}"></script>
+    <script src="{% static '/core/js/api_dogo.js' %}"></script>
+    <script src="{% static '/core/js/base_form_validation.js' %}"></script>
 
 
     <!-- Barra Información -->
@@ -171,7 +160,7 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
+
 {% block content %}
 
 
@@ -247,10 +236,16 @@
                     </label>
                 </div>
             </div>
-            <div style="  width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" class="mb-3 row " >
-                <label> Caracteres restantes: <span></span></label>
-                <textarea maxlength="150"></textarea>
-            </div>
+            <div class="detalle">
+                <p class="lbl_detalle">Cuentanos en que te podemos ayudar
+
+                </p>
+                <textarea class="txt_detalle" id="txt_detalle" name="txt_detalle" rows="4" cols="50" maxlength="200"></textarea>
+                    <div class="detalle">
+                        <span class="contador" id="contador">200 caracteres restantes  
+                        </span>
+                    <div class="detalle">
+              </div>
             <div class="mb-3">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch"
