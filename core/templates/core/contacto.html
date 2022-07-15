@@ -3,7 +3,265 @@
 
 {% load static %}
 {% block tittle %}Contacto{% endblock %}
+<body class="d-flex flex-column min-vh-100">
+    <!-- Barra Información -->
+    <nav class="navbar navbar-expand navbar-light py-0" style="background-color: #0144c9;">
+        <div class="container-fluid p-0">
+            <div class="navbar-brand nav-item active py-0">
+                <span class="py-1" style="font-size: .9rem; color: whitesmoke;">Contactanos</span>
+                <span class="navbar-text py-1 ml-2" style="font-size: .8rem; color: whitesmoke;"><i class="bi bi-whatsapp"></i> +56 9 999 999</span>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active justify-content-right ml-auto">
+                    <span class="navbar-text py-1" style="font-size: .9rem;">
+                        <a style="color: whitesmoke;" href="https://www.instagram.com/" class="nav-link py-0"><i class="bi bi-instagram"></i></a>
+                    </span>
+                    <span class="navbar-text py-1" style="font-size: .9rem; ">
+                        <a style="color: whitesmoke;" href="https://www.facebook.com/" class="nav-link py-0"><i class="bi bi-facebook"></i></a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
 
+    <!--  Barra de Navegacion Principal  -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="{% url 'home' %}">K-Pro PetStore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavBar01" aria-controls="NavBar01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Barra de Busqueda -->
+            <div class="collapse navbar-collapse" id="NavBar01">
+                <form class="form-inline justify-content-center mx-auto my-2">
+                    <input class="form-control text-center" type="search" placeholder="¿Qué buscas?">
+                    <button class="btn btn-danger mx-2 my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                
+                <ul class="navbar-nav text-center mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link active px-2 py-1"
+                        type="button" data-toggle="modal" data-target="#CarritoModdal"
+                        href="#"><i class="bi bi-cart" style="font-size: 1.5rem;" ></i><span class="mx-2 d-md-none d-lg-none d-xl-none">Carrito de Compras</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link active px-2 py-1"
+                        type="button" data-toggle="modal" data-target="#UsuarioModdal"
+                        href="#"><i class="bi bi-person-circle" style="font-size: 1.5rem;"></i><span class="mx-2 d-md-none d-lg-none d-xl-none">Usuario</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Barra de Categorias -->
+    <nav class="navbar navbar-expand navbar-light bg-light" >
+        <div class="container-fluid p-0">
+            <ul class="navbar-nav">
+                <li class="nav-item active">    
+                    <a class="nav-link py-0" href="{% url 'productos' %}">Perro</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link py-0" href="{% url 'productos' %}">Gato</a>
+                </li>
+            </ul>
+        </div>
+        <div id="weather" class="d-flex" style="font-size: 1rem;">
+            <img class="d-inline inline-block m-0" id="wicon" src="" alt="Weather icon" style="height: 2rem; width: auto;">
+            <p class="d-inline m-0" id="cityname"></p>
+            <p class="temp d-inline m-0"></p>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
 {% block content %}
 
+<form>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Registrare para estar al tanto</h3>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <div id="wrapper" >
+                    <p>&nbsp;</p>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon" id="sizing-addon1">Rut</span>
+                      <input type="text" class="form-control" placeholder="Rut a validar, ej: 11111111-1" aria-describedby="sizing-addon1" id="txt_rut">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="nombre">Nombre</label>
+                <input class="form-control" type="text" name="nombre" id="nombre"
+                    placeholder="Ej. juan" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="nombre">Apellido</label>
+                <input class="form-control" type="text" name="apellido" id="apellido"
+                    placeholder="Ej. Herrera" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="email"
+                    placeholder="Ej. correoejemplo@gmail.com" required>
+            </div>
+            <div class="mb-3 row">
+                <label class="fw-bold col-sm-4 col-form-label" for="password">Contraseña</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="password" name="password" id="password"
+                        placeholder="********" required>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="fw-bold col-sm-4 col-form-label" for="confirm_password">Confirme contraseña</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="password" name="confirm_password"
+                        id="confirm_password" placeholder="********" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="fono">numero de contacto</label>
+                <input class="form-control" type="tel" name="fono" id="fono"
+                    pattern="+[0-9]{2} [0-9]{1} [0-9]{4} [0-9]{4}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="fecha_nac">Fecha Nacimiento</label>
+                <input class="form-control" type="date" name="fecha_nac" id="fecha_nac"
+                    min="1900-01-01" max="2100-12-31" value="2022-04-27">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="genero">Genero</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="genero" id="femenino"
+                        value="femenino" checked>
+                    <label class="form-check-label" for="femenino">
+                        Femenino
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="genero" id="masculino"
+                        value="masculino">
+                    <label class="form-check-label" for="masculino">
+                        Masculino
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="genero" id="no_responde"
+                        value="no responde">
+                    <label class="form-check-label" for="no_responde">
+                        Prefiere no responder
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label> Caracteres restantes: <span></span></label>
+                <textarea maxlength="150"></textarea>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch"
+                        id="acepto_termino">
+                    <label class="form-check-label" for="acepto_termino">Acepto términos y
+                        condiciones</label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <div class="form-group">
+                <input type="submit" class="btn btn-outline-primary m-2" value="Enviar">
+                <input type="reset" class="btn btn-outline-warning m-2" value="Cancelar">
+            </div>
+        </div>
+    </div>
+    </form>
+
 {% endblock %}
+{% block extra_js %}
+<script> 
+    var Fn = {
+        // Valida el rut con su cadena completa "XXXXXXXX-X"
+        validaRut : function (rutCompleto) {
+            rutCompleto = rutCompleto.replace("‐","-");
+            if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+                return false;
+            var tmp 	= rutCompleto.split('-');
+            var digv	= tmp[1]; 
+            var rut 	= tmp[0];
+            if ( digv == 'K' ) digv = 'k' ;
+            
+            return (Fn.dv(rut) == digv );
+        },
+        dv : function(T){
+            var M=0,S=1;
+            for(;T;T=Math.floor(T/10))
+                S=(S+T%10*(9-M++%6))%11;
+            return S?S-1:'k';
+        }
+    }
+    
+    
+    $("#btnvalida").click(function(){
+        if (Fn.validaRut( $("#txt_rut").val() )){
+            $("#msgerror").html("El rut ingresado es válido :D");
+        } else {
+            $("#msgerror").html("El Rut no es válido :'( ");
+        }
+    });
+</script>
+<script>
+    HTML CSS JSResult Skip Results Iframe
+    EDIT ON
+    var inputs = "input[maxlength], textarea[maxlength]";
+      $(document).on('keyup', "[maxlength]", function (e) {
+        var este = $(this),
+          maxlength = este.attr('maxlength'),
+          maxlengthint = parseInt(maxlength),
+          textoActual = este.val(),
+          currentCharacters = este.val().length;
+          remainingCharacters = maxlengthint - currentCharacters,
+          espan = este.prev('label').find('span');      
+          // Detectamos si es IE9 y si hemos llegado al final, convertir el -1 en 0 - bug ie9 porq. no coge directamente el atributo 'maxlength' de HTML5
+          if (document.addEventListener && !window.requestAnimationFrame) {
+            if (remainingCharacters <= -1) {
+              remainingCharacters = 0;            
+            }
+          }
+          espan.html(remainingCharacters);
+          if (!!maxlength) {
+            var texto = este.val(); 
+            if (texto.length >= maxlength) {
+              este.removeClass().addClass("borderojo");
+              este.val(text.substring(0, maxlength));
+              e.preventDefault();
+            }
+            else if (texto.length < maxlength) {
+              este.removeClass().addClass("bordegris");
+            } 
+          } 
+        });
+    </script>
+{% endblock %}
+    <!-- Footer -->
+    <footer class="bg-primary text-center mt-auto" style="color: white;">
+        <div class="container p-4">
+            <section class="mb-4">
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i class="bi bi-facebook"></i></a>
+  
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i class="bi bi-instagram"></i></i></a>
+  
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #25D366" href="#!" role="button"><i class="bi bi-whatsapp"></i></a>
+
+                <a id="doggobtn" class="btn btn-primary btn-floating m-1 rainbow-bg" href="#!" type="button" data-toggle="modal" data-target="#ApiModal" role="button"><i class="bi bi-question-diamond-fill"></i></a>
+            </section>
+            <section class="mb-4">
+                <p>
+                    K-Pro PetStore es una tienda online creada con la finalidad de ayudar a una organización sin fines de lucro.
+                </p>
+            </section>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        </div>
+    </footer>
+</body>
+</html
