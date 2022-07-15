@@ -38,9 +38,9 @@
                         <td>{{p.precio}}</td>
                         <td>{{p.stock}}</td>
                         {% if p.imagen %}
-                        <td><img class="img-producto" src="{{p.imagen.url}}" alt="{{p.idPrducto}}"></td>
+                        <td><img class="img-producto" src="{{p.imagen.url}}" alt="{{p.id_producto}}"></td>
                         {% else %}
-                        <td><img class="img-producto" src="{% static 'crud/img/folder-x.svg' %}" alt="{{p.id_prducto}}">
+                        <td><img class="img-producto" src="{% static 'crud/img/folder-x.svg' %}" alt="{{p.id_producto}}">
                         </td>
                         {% endif %}
                         <td>{{p.descripcion}}</td>
