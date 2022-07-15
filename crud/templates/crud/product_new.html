@@ -15,16 +15,16 @@
 <div class="container mt-4 mb-4">
 
     {% if 'OK' in request.GET %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Producto Agregado Correctamente!
-        </div>
-        {% endif %}
-        {% if 'FAIL' in request.GET %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Error al agregar el producto!
-        </div>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Producto Agregado Correctamente!
+    </div>
+    {% endif %}
+    {% if 'FAIL' in request.GET %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Error al agregar el producto!
+    </div>
     {% endif %}
 
     <form action="" method="POST" enctype="multipart/form-data">

@@ -39,3 +39,12 @@ def product_new(request):
     else:
         form = ProductForm
     return render(request,'crud/product_new.html',{'form':form})
+
+def product_detail(request, product_id):
+    try:
+        producto = Producto.objects.get(id_producto=product_id)
+        if producto:
+            context = {'producto':producto}
+            return render(request,'crud/product_detail.html',context)
+    except:
+        return redirect(reverse('product-list') + "?FAIL")

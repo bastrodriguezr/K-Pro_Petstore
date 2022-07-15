@@ -13,6 +13,13 @@
     </div>
 </div>
 
+{% if 'FAIL' in request.GET %}
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    Error al agregar al realizar la acción!
+</div>
+{% endif %}
+
 <div class="container-fluid mt-4 mb-4">
     <div class="row">
         <div class="table-responsive">
@@ -45,7 +52,13 @@
                         {% endif %}
                         <td>{{p.descripcion}}</td>
                         <td>{{p.marca}}</td>
+                        <td>
+                            <a class="btn btn-outline-dark" href="/crud/{{p.id_producto}}">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                        </td>
                     </tr>
+  
                     {% endfor %}
                 </tbody>
             </table>
@@ -53,34 +66,6 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Mensajes</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h6 class="modal-title">Estas seguro que deseas eliminar el producto seleccionado?<br>Este proceso no se puede deshacer.</h6>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
-                <a href="#" id="confirmar-borrar" class="btn btn-danger">Si</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endblock %}
-
-{% block js %}
-<script>
-    $('.modal-borrar').on('click',function() {
-        const href = $(this).attr('data-href');
-        $('#confirmar-borrar').attr('href',href);
-    })
-</script>
 
 {% endblock %}
 
