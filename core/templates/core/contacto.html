@@ -2,8 +2,78 @@
 {% extends 'core/base.html' %}
 
 {% load static %}
+ <!-- Link al CSS de Bootstrap -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+ <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 {% block tittle %}Contacto{% endblock %}
 <body class="d-flex flex-column min-vh-100">
+
+    <script src="{% static '/core/js/api_clima.js' %}"></script>
+    <script src="{% static '/core/js/api_dogo.js' %}"></script>
+    <script src="{% static '/core/js/base_form_validation.js' %}"></script>
+    <script> 
+        var Fn = {
+            // Valida el rut con su cadena completa "XXXXXXXX-X"
+            validaRut : function (rutCompleto) {
+                rutCompleto = rutCompleto.replace("‐","-");
+                if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+                    return false;
+                var tmp 	= rutCompleto.split('-');
+                var digv	= tmp[1]; 
+                var rut 	= tmp[0];
+                if ( digv == 'K' ) digv = 'k' ;
+                
+                return (Fn.dv(rut) == digv );
+            },
+            dv : function(T){
+                var M=0,S=1;
+                for(;T;T=Math.floor(T/10))
+                    S=(S+T%10*(9-M++%6))%11;
+                return S?S-1:'k';
+            }
+        }
+        
+    </script>
+    <script>
+        HTML CSS JSResult Skip Results Iframe
+        EDIT ON
+        var inputs = "input[maxlength], textarea[maxlength]";
+          $(document).on('keyup', "[maxlength]", function (e) {
+            var este = $(this),
+              maxlength = este.attr('maxlength'),
+              maxlengthint = parseInt(maxlength),
+              textoActual = este.val(),
+              currentCharacters = este.val().length;
+              remainingCharacters = maxlengthint - currentCharacters,
+              espan = este.prev('label').find('span');      
+              // Detectamos si es IE9 y si hemos llegado al final, convertir el -1 en 0 - bug ie9 porq. no coge directamente el atributo 'maxlength' de HTML5
+              if (document.addEventListener && !window.requestAnimationFrame) {
+                if (remainingCharacters <= -1) {
+                  remainingCharacters = 0;            
+                }
+              }
+              espan.html(remainingCharacters);
+              if (!!maxlength) {
+                var texto = este.val(); 
+                if (texto.length >= maxlength) {
+                  este.removeClass().addClass("borderojo");
+                  este.val(text.substring(0, maxlength));
+                  e.preventDefault();
+                }
+                else if (texto.length < maxlength) {
+                  este.removeClass().addClass("bordegris");
+                } 
+              } 
+            });
+        </script>
+
+
     <!-- Barra Información -->
     <nav class="navbar navbar-expand navbar-light py-0" style="background-color: #0144c9;">
         <div class="container-fluid p-0">
@@ -78,18 +148,19 @@
     <!-- Contenido Principal -->
 {% block content %}
 
+
 <form>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Registrare para estar al tanto</h3>
         </div>
         <div class="card-body">
-            <div class="mb-3">
+            <div class="mb-3 row ">
                 <div id="wrapper" >
                     <p>&nbsp;</p>
                     <div class="input-group input-group-lg">
                       <span class="input-group-addon" id="sizing-addon1">Rut</span>
-                      <input type="text" class="form-control" placeholder="Rut a validar, ej: 11111111-1" aria-describedby="sizing-addon1" id="txt_rut">
+                      <input type="text" class="form-control" placeholder="Rut a validar, ej: 11111111-1" name="rut" id="txt_rut">
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold" for="nombre">Nombre</label>
@@ -154,7 +225,7 @@
                     </label>
                 </div>
             </div>
-            <div class="mb-3">
+            <div style="  width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box;" class="mb-3 row " >
                 <label> Caracteres restantes: <span></span></label>
                 <textarea maxlength="150"></textarea>
             </div>
@@ -176,71 +247,7 @@
     </div>
     </form>
 
-{% endblock %}
-{% block extra_js %}
-<script> 
-    var Fn = {
-        // Valida el rut con su cadena completa "XXXXXXXX-X"
-        validaRut : function (rutCompleto) {
-            rutCompleto = rutCompleto.replace("‐","-");
-            if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
-                return false;
-            var tmp 	= rutCompleto.split('-');
-            var digv	= tmp[1]; 
-            var rut 	= tmp[0];
-            if ( digv == 'K' ) digv = 'k' ;
-            
-            return (Fn.dv(rut) == digv );
-        },
-        dv : function(T){
-            var M=0,S=1;
-            for(;T;T=Math.floor(T/10))
-                S=(S+T%10*(9-M++%6))%11;
-            return S?S-1:'k';
-        }
-    }
-    
-    
-    $("#btnvalida").click(function(){
-        if (Fn.validaRut( $("#txt_rut").val() )){
-            $("#msgerror").html("El rut ingresado es válido :D");
-        } else {
-            $("#msgerror").html("El Rut no es válido :'( ");
-        }
-    });
-</script>
-<script>
-    HTML CSS JSResult Skip Results Iframe
-    EDIT ON
-    var inputs = "input[maxlength], textarea[maxlength]";
-      $(document).on('keyup', "[maxlength]", function (e) {
-        var este = $(this),
-          maxlength = este.attr('maxlength'),
-          maxlengthint = parseInt(maxlength),
-          textoActual = este.val(),
-          currentCharacters = este.val().length;
-          remainingCharacters = maxlengthint - currentCharacters,
-          espan = este.prev('label').find('span');      
-          // Detectamos si es IE9 y si hemos llegado al final, convertir el -1 en 0 - bug ie9 porq. no coge directamente el atributo 'maxlength' de HTML5
-          if (document.addEventListener && !window.requestAnimationFrame) {
-            if (remainingCharacters <= -1) {
-              remainingCharacters = 0;            
-            }
-          }
-          espan.html(remainingCharacters);
-          if (!!maxlength) {
-            var texto = este.val(); 
-            if (texto.length >= maxlength) {
-              este.removeClass().addClass("borderojo");
-              este.val(text.substring(0, maxlength));
-              e.preventDefault();
-            }
-            else if (texto.length < maxlength) {
-              este.removeClass().addClass("bordegris");
-            } 
-          } 
-        });
-    </script>
+
 {% endblock %}
     <!-- Footer -->
     <footer class="bg-primary text-center mt-auto" style="color: white;">
