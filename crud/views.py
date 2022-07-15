@@ -50,7 +50,7 @@ def product_detail(request, product_id):
         return redirect(reverse('product-list') + "?FAIL")
 
 
-def product_edit(request,product_id):
+def product_edit(request, product_id):
     try:
         producto = Producto.objects.get(id_producto=product_id)
         if producto:
@@ -67,5 +67,13 @@ def product_edit(request,product_id):
                 return redirect(reverse('product-edit') + product_id)
         context = {'form':form}
         return render(request,'crud/product_edit.html',context)
+    except:
+        return redirect(reverse('product-list') + "?FAIL")
+
+def product_delete(request, product_id):
+    try:
+        producto = Producto.objects.get(id_producto=product_id)
+        producto.delete()
+        return redirect(reverse('product-list') + "?DELETED")
     except:
         return redirect(reverse('product-list') + "?FAIL")
