@@ -39,3 +39,41 @@ def product_new(request):
     else:
         form = ProductForm
     return render(request,'crud/product_new.html',{'form':form})
+
+def product_detail(request, product_id):
+    try:
+        producto = Producto.objects.get(id_producto=product_id)
+        if producto:
+            context = {'producto':producto}
+            return render(request,'crud/product_detail.html',context)
+    except:
+        return redirect(reverse('product-list') + "?FAIL")
+
+
+def product_edit(request, product_id):
+    try:
+        producto = Producto.objects.get(id_producto=product_id)
+        if producto:
+            form = ProductForm(instance=producto)
+        else:
+            return redirect(reverse('product-list') + "?FAIL")
+
+        if request.method == 'POST':
+            form = ProductForm(request.POST,request.FILES,instance=producto)
+            if form.is_valid():
+                form.save()
+                return redirect(reverse('product-list') + "?SUCCESS")
+            else:
+                return redirect(reverse('product-edit') + product_id)
+        context = {'form':form}
+        return render(request,'crud/product_edit.html',context)
+    except:
+        return redirect(reverse('product-list') + "?FAIL")
+
+def product_delete(request, product_id):
+    try:
+        producto = Producto.objects.get(id_producto=product_id)
+        producto.delete()
+        return redirect(reverse('product-list') + "?DELETED")
+    except:
+        return redirect(reverse('product-list') + "?FAIL")

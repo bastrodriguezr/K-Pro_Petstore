@@ -2,30 +2,17 @@
 {% extends 'crud/base.html' %}
 
 {% load static %}
-{% block tittle %}Lista de Productos{% endblock %}
+{% block tittle %}Actualizar Productos{% endblock %}
 
 {% block content %}
 
 <div class="container text-center">
     <div class="row">
-        <h5 class="col-12 p-2 text-primary">AÑADIR PRODUCTO</h5>
+        <h5 class="col-12 p-2 text-primary">EDITAR PRODUCTO</h5>
     </div>
 </div>
 
-<div class="container mt-4 mb-4">
-
-    {% if 'OK' in request.GET %}
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        Producto Agregado Correctamente!
-    </div>
-    {% endif %}
-    {% if 'FAIL' in request.GET %}
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        Error al agregar el producto!
-    </div>
-    {% endif %}
+<div class="container mb-4">
 
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -54,13 +41,6 @@
             </div>
         </div>
         <div class="form-group mb-3">
-            <label for="imagen" class="font-weight-bold">Imagen</label>
-            <div class="input-group custom-file">
-                {{form.imagen}}
-                <label class="custom-file-label" for="id_imagen">Elige el Archivo</label>
-            </div>
-        </div>
-        <div class="form-group mb-3">
             <label for="descripcion" class="font-weight-bold">Descripción</label>
             <div class="input-group">
                 {{form.descripcion}}
@@ -72,12 +52,25 @@
                 {{form.marca}}
             </div>
         </div>
+        <div class="form-group mb-3">
+            <label for="imagen" class="font-weight-bold">Imagen</label>
+            <div class="input-group custom-file">
+                {{form.imagen}}
+                <label class="custom-file-label" for="id_imagen">Elige el Archivo</label>
+            </div>
+            {% if form.instance.imagen %}
+                <div class="div">
+                    <img class="img-update" src="{{form.instance.imagen.url}}" alt="">
+                </div>
+            {% endif %}
+        </div>
         <div class="text-center mt-4">
-            <input type="submit" class="btn btn-outline-primary btn-block py-2" id="enviar" value="Registrar">
+            <input type="submit" class="btn btn-outline-primary btn-block py-2" id="actualizar" value="Actualizar">
             <input type="reset" class="btn btn-outline-success btn-block py-2" id="limpiar" value="Limpiar">
         </div>
     </form>
 </div>
+
 
 <script src="{% static 'crud/js/main.js' %}"></script>
 {% endblock %}
